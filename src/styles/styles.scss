@@ -1,0 +1,32 @@
+.button {
+    font-size: 1em;
+    padding: 0.25em;
+    border-radius: 3px;
+    width: 4rem;
+    display: inline;
+    margin-left: 15px;
+}
+
+html[data-theme="light"] {
+    a {
+        color: #11191f;
+        &:hover {
+            color: #1095c1;
+        }
+    }
+}
+
+//a simple pastebin clone to host snippets of code online
+html[data-theme="dark"] {
+    a {
+        color: #fff;
+        &:hover {
+            color: #1095c1;
+        }
+    }
+}
+
+.date {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

@@ -1,0 +1,29 @@
+.button {
+  font-size: 1em;
+  padding: 0.25em;
+  border-radius: 3px;
+  width: 4rem;
+  display: inline;
+  margin-left: 15px;
+}
+
+html[data-theme=light] a {
+  color: #11191f;
+}
+html[data-theme=light] a:hover {
+  color: #1095c1;
+}
+
+html[data-theme=dark] a {
+  color: #fff;
+}
+html[data-theme=dark] a:hover {
+  color: #1095c1;
+}
+
+.date {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/*# sourceMappingURL=styles.css.map */
