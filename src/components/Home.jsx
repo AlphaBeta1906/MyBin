@@ -10,33 +10,53 @@ const Card = lazy(function(){
 
 function Home(props){
     const [page,setPage] = useState(1)
-    const [pastes,setBlog] = useState([])
+    const [pastes,setPastes] = useState([])
     const [loading,setLoading] = useState(false)
     const [complete,setComplete] = useState(false)
-    const tag_param = useParams().tag
+    const [sort,setSort] = useState("latest")
     document.title = "Home"
-    console.log(tag_param)
     useEffect(function(){
         setLoading(true)
         axios
-        .get(`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes?page=${page}`)
+        .get(`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes/${sort}?page=${page}`)
         .then(function(data){
             if (data.data.pastes.length === 0) {
                 setComplete(true)
             }else{
-                setBlog(oldArr => [...oldArr,...data.data.pastes])
+                setPastes(oldArr => [...oldArr,...data.data.pastes])
             }
             setLoading(false)
             
         })
     },[page])
 
+    useEffect(function(){
+        setLoading(true)
+        axios
+        .get(`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes/${sort}`)
+        .then(function(data){
+            setPastes(data.data.pastes)
+            setLoading(false)
+        })
+    },[sort])
+
     function addPage(){
         setPage(page+1)
     }
 
+    function changeShort(e){
+        setLoading(true)
+        setComplete(false)
+        setPage(1)
+        setSort(e.target.value)
+    }
     return (
         <div className="container">
+            <lavel htmlFor="sort">Sort</lavel>
+            <select name="sort" value={sort} onChange={changeShort}>
+                <option value="latest">Latest</option>
+                <option value="oldest">oldest</option>
+            </select>
             {
                 loading && pastes.length <= 0?
                 <center>
