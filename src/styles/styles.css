@@ -26,4 +26,8 @@ html[data-theme=dark] a:hover {
   padding-bottom: 10px;
 }
 
+.container {
+  padding-top: 30px;
+}
+
 /*# sourceMappingURL=styles.css.map */
