@@ -11,6 +11,7 @@ export default defineConfig({
                 name: "MyBin",
                 short_name: "MyBin",
                 description: "a simple pastebin clone to host snippets of code online",
+                start_url: "/",
                 theme_color: "#ffffff",
                 icons: [{
                         src: "pwa-192x192.png",
