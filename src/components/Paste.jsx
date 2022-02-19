@@ -5,10 +5,12 @@ import { coldarkDark  } from "react-syntax-highlighter/dist/esm/styles/prism"
 import axios from "axios"
 import dayjs from "dayjs"
 import CopyToClipboard from "react-copy-to-clipboard"
+import { connectionError } from "../utils/utils"
 
 function Paste(){
     const [paste,setPaste] = useState({})
     const [raw,setRaw] = useState(false)
+    const [error,setError] = useState(false)
     document.title = paste.title
     var {id} = useParams()
     console.log(id)
@@ -21,7 +23,7 @@ function Paste(){
                 setPaste(data.data)            
                 })
             .catch(function(err){
-                console.log(err)
+                setError(connectionError(err))
             })
         },[id])
     
@@ -43,6 +45,11 @@ function Paste(){
                 </CopyToClipboard>
             </div>
             {
+                error?
+                <h1 style={{textAlign: "center"}}>
+                    connection error
+                </h1>
+                :
                 raw?
                 <pre>
                     <code>{paste.code}</code>

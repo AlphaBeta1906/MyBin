@@ -1,6 +1,7 @@
 import { useEffect,useState,lazy } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+import { connectionError } from "../utils/utils"
 
 const Card = lazy(function(){
     return import("./Card")
@@ -14,7 +15,10 @@ function Home(props){
     const [loading,setLoading] = useState(false)
     const [complete,setComplete] = useState(false)
     const [sort,setSort] = useState("latest")
+    const [error,setError] = useState(false)
     document.title = "Home"
+
+
     useEffect(function(){
         setLoading(true)
         axios
@@ -27,6 +31,11 @@ function Home(props){
             }
             setLoading(false)
             
+        }).catch(function(err){
+            if(connectionError(err)){
+                setError(true)
+            }
+            console.log(error)
         })
     },[page])
 
@@ -37,6 +46,9 @@ function Home(props){
         .then(function(data){
             setPastes(data.data.pastes)
             setLoading(false)
+        })
+        .catch(function(err){
+            connectionError(err)
         })
     },[sort])
 
@@ -58,6 +70,11 @@ function Home(props){
                 <option value="oldest">oldest</option>
             </select>
             {
+                error?
+                <h1 style={{textAlign: "center"}}>
+                    Conection error
+                </h1>
+                :
                 loading && pastes.length <= 0?
                 <center>
                     <span aria-busy="true" />
