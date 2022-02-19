@@ -18,7 +18,7 @@ function Home(props){
     useEffect(function(){
         setLoading(true)
         axios
-        .get(`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes/${sort}?page=${page}`)
+        .get(`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes/${sort}/?page=${page}`)
         .then(function(data){
             if (data.data.pastes.length === 0) {
                 setComplete(true)
@@ -33,7 +33,7 @@ function Home(props){
     useEffect(function(){
         setLoading(true)
         axios
-        .get(`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes/${sort}`)
+        .get(`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes/${sort}/`)
         .then(function(data){
             setPastes(data.data.pastes)
             setLoading(false)
