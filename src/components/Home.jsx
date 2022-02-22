@@ -16,13 +16,14 @@ function Home(props){
     const [complete,setComplete] = useState(false)
     const [sort,setSort] = useState("latest")
     const [error,setError] = useState(false)
+    var {language} = useParams()
     document.title = "Home"
+    var url = language == undefined?`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes/${sort}/`:`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes/${sort}/${language}`
 
-
-    useEffect(function(){
+    function fetch(page=1){
         setLoading(true)
         axios
-        .get(`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes/${sort}/?page=${page}`)
+        .get(`${url}?page=${page}`)
         .then(function(data){
             if (data.data.pastes.length === 0) {
                 setComplete(true)
@@ -37,12 +38,26 @@ function Home(props){
             }
             console.log(error)
         })
+        
+    }    
+
+    useEffect(function(){
+        setComplete(false)
+        setPastes([])   
+        setPage(1)
+        fetch(1)
+    },[language])
+
+    useEffect(function(){
+        // use effect when page changed
+        fetch(page)
+        console.log(page)
     },[page])
 
     useEffect(function(){
         setLoading(true)
         axios
-        .get(`https://pastebincloneapi.pythonanywhere.com/api/v1/pastes/${sort}/`)
+        .get(url)
         .then(function(data){
             setPastes(data.data.pastes)
             setLoading(false)
@@ -51,6 +66,7 @@ function Home(props){
             connectionError(err)
         })
     },[sort])
+
 
     function addPage(){
         setPage(page+1)
