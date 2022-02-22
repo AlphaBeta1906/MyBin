@@ -5,7 +5,7 @@ import "animate.css"
 function Card(props){
     var date = new Date(props.date_created)
     return (
-        <article className="animate__animated animate__fadeInUp">
+        <article className="animate__animated animate__fadeInUp" id={props.id} key={props.id}>
             <Link to={`/paste/${props.unique_id}`} style={{fontSize: "1.5rem",textDecoration: "none"}}>{props.title}</Link>
             <span style={{display: "block"}}>
                 Language : <Link to={`/${props.language}`}>{props.language}</Link> 
