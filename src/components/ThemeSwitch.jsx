@@ -1,13 +1,13 @@
 import { useState } from "react"
 import u from "umbrellajs"
+import { useTheme } from "../utils/utils"
 
 function ThemeSwitch(){
-    const [theme,setTheme] = useState(localStorage.getItem("theme") === null ? "light" : localStorage.getItem("theme"))
+    const [theme,setTheme] = useTheme()
     u("html").attr("data-theme",theme)
     function switchTheme(){
-        setTheme(theme == "dark"?"light":"dark")
         u("html").attr("data-theme",theme)
-        localStorage.setItem("theme",theme == "light"?"dark":"light")
+        setTheme(theme == "dark"?"light":"dark")
     }
     return (
         <div className="theme" style={{height:"1rem",width:"1rem",textAlign: "center",cursor: "pointer",fontSize: "16pt"}} onClick={switchTheme}>

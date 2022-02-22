@@ -1,17 +1,18 @@
 import { useState,useEffect,useContext } from "react"
 import { useParams,Link } from "react-router-dom"
 import { Prism as  SyntaxHighlighter} from "react-syntax-highlighter"
-import { coldarkDark,coy  } from "react-syntax-highlighter/dist/esm/styles/prism"
+import { coldarkDark as darkTheme,coldarkCold as ligthTheme  } from "react-syntax-highlighter/dist/esm/styles/prism"
 import axios from "axios"
 import dayjs from "dayjs"
 import CopyToClipboard from "react-copy-to-clipboard"
 import { connectionError } from "../utils/utils"
+import { useTheme } from "../utils/utils"
 
 function Paste(){
     const [paste,setPaste] = useState({})
     const [raw,setRaw] = useState(false)
     const [error,setError] = useState(false)
-    const [theme,setTheme] = useState(localStorage.getItem("theme") === null ? "light" : localStorage.getItem("theme"))
+    const [theme,setTheme] = useTheme()
     document.title = paste.title
     var {id} = useParams()
 
@@ -63,7 +64,7 @@ function Paste(){
                 paste.code?
                 <SyntaxHighlighter 
                 language={paste.language} 
-                style={theme=="dark"?coldarkDark:coy} 
+                style={theme=="dark"?darkTheme:ligthTheme} 
                 customStyle={{fontSize: "1.5em"}} 
                 codeTagProps={{fontSize: "inherit"}}>
                     {paste.code}
