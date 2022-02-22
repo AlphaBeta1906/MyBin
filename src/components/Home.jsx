@@ -48,11 +48,6 @@ function Home(props){
         fetch(1)
     },[language])
 
-    useEffect(function(){
-        // use effect when page changed
-        fetch(page)
-        console.log(page)
-    },[page])
 
     useEffect(function(){
         setLoading(true)
@@ -70,6 +65,7 @@ function Home(props){
 
     function addPage(){
         setPage(page+1)
+        fetch(page === 1?2:page)
     }
 
     function changeShort(e){
@@ -117,7 +113,7 @@ function Home(props){
                         </center>
                         :
                         !complete && pastes.length >= 9?
-                        <button onClick={addPage}>Load more</button>
+                        <button onClick={addPage}>Load more </button>
                         :
                         <span/>
                     }
