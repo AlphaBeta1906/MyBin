@@ -25,6 +25,7 @@ function App() {
                         <Route exact path="/" element={<Home/>} />
                         <Route path="/newpaste" element={<NewPaste/>} />
                         <Route path="/paste/:id" element={<Paste/>} />
+                        <Route path="/:language" element={<Home/>} />
                     </Routes>              
                 </Suspense>
               </div>
