@@ -13,7 +13,7 @@ function Paste(){
     const [raw,setRaw] = useState(false)
     const [error,setError] = useState(false)
     const [theme,setTheme] = useTheme()
-    document.title = paste.title
+    document.title = paste.title? paste.title:"MyBin"
     var {id} = useParams()
 
     useEffect(function(){
