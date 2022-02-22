@@ -10,7 +10,7 @@ function ThemeSwitch(){
         setTheme(theme == "dark"?"light":"dark")
     }
     return (
-        <div className="theme" style={{height:"1rem",width:"1rem",textAlign: "center",cursor: "pointer",fontSize: "16pt"}} onClick={switchTheme}>
+        <div className="theme" style={{height:"1rem",width:"1rem",textAlign: "center",cursor: "pointer",fontSize: "18pt",marginBottom: "24px"}} onClick={switchTheme}>
                 {
                     theme == "dark"?
                         (
