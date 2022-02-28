@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
+import Lang from "../utils/Lang"
 
 function NewPaste(){
     document.title = "New paste"
@@ -53,16 +54,11 @@ function NewPaste(){
             id="title"/>
             <label for="language">Language</label>
             <select name="language" value={state.language} onChange={handleInput}>
-                <option value="python">python</option>
-                <option value="java">java</option>
-                <option value="cpp">c++</option>
-                <option value="c">c</option>
-                <option value="c#">c#</option>
-                <option value="ruby">ruby</option>
-                <option value="go">go</option>
-                <option value="rust">rust</option>
-                <option value="jsx">jsx</option>
-                <option value="typescript">typescript</option>
+                {
+                    Object.keys(Lang).map(key => (
+                        <option value={Lang[key]}>{key}</option>
+                    ))
+                }
             </select>
             <label for="code">Code</label>
             <textarea 
